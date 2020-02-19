@@ -13,16 +13,13 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { NgxCurrencyModule } from 'ngx-currency';
 
 import { SharedModule } from './../shared/shared.module';
-
-import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
 import { LancamentoPesquisaComponent } from './lancamento-pesquisa/lancamento-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 
 @NgModule({
   declarations: [
     LancamentoCadastroComponent,
-    LancamentoPesquisaComponent,
-    LancamentosGridComponent
+    LancamentoPesquisaComponent
   ],
   imports: [
     CommonModule,
