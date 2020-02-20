@@ -34,7 +34,7 @@ export class PessoaService {
         const resultado = {
           pessoas,
           total: response['totalElements']
-        }
+        };
         return resultado;
       });
   }
@@ -47,6 +47,25 @@ export class PessoaService {
         const resultado = response['content']
         return  resultado;
       });
+  }
+
+    excluir(codigo: number): Promise<void> {
+      const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+      return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers })
+      .toPromise()
+      .then(() => null);
+    }
+
+    mudarStatus(codigo: number, ativo: boolean): Promise<void> {
+
+      let headers = new HttpHeaders();
+
+      headers = headers.set('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+      headers = headers.set('Content-Type', 'application/json');
+
+      return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
+        .toPromise()
+        .then(() => null);
     }
 
 }
