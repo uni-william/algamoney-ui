@@ -1,7 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -16,6 +15,7 @@ import { NgxCurrencyModule } from 'ngx-currency';
 import { SharedModule } from './../shared/shared.module';
 import { LancamentoPesquisaComponent } from './lancamento-pesquisa/lancamento-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
+import { LancamentosRoutingModule } from './lancamentos-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,6 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,
 
     ButtonModule,
     TableModule,
@@ -37,11 +36,9 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
     DropdownModule,
     NgxCurrencyModule,
 
-    SharedModule
+    SharedModule,
+    LancamentosRoutingModule
   ],
-  exports: [
-    LancamentoCadastroComponent,
-    LancamentoPesquisaComponent
-  ]
+  exports: []
 })
 export class LancamentosModule { }

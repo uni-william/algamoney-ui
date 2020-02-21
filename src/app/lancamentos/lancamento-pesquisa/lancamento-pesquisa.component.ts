@@ -5,6 +5,7 @@ import { Table } from 'primeng/table/table';
 import { ToastyService } from 'ng2-toasty';
 import {ConfirmationService} from 'primeng/api';
 import { ErrorHandlerService } from './../../core/error-handler.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamento-pesquisa',
@@ -22,11 +23,12 @@ export class LancamentoPesquisaComponent implements OnInit {
     private lancamentoService: LancamentoService,
     private errorHandle: ErrorHandlerService,
     private toasty: ToastyService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private title: Title
   ) { }
 
   ngOnInit() {
-    // this.pesquisar();
+    this.title.setTitle('Pesquisa de lançamentos');
   }
 
   pesquisar(pagina = 0) {

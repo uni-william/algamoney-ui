@@ -12,10 +12,12 @@ import { CategoriaService } from './../categorias/categoria.service';
 import { ErrorHandlerService } from './error-handler.service';
 
 import { NavbarComponent } from './navbar/navbar.component';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import { Title } from '@angular/platform-browser';
 
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -32,7 +34,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     LancamentoService,
     PessoaService,
     CategoriaService,
+
     ConfirmationService,
+    Title,
+
     ErrorHandlerService,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
 

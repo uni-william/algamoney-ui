@@ -3,7 +3,7 @@
 
     <div class="ui-g">
       <div class="ui-g-12">
-        <h1>Novo lançamento</h1>
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} lançamento</h1>
       </div>
 
       <div class="ui-g-12">
@@ -71,8 +71,9 @@
 
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar"
-        style="margin-right: 2px;" [disabled]="!f.valid"></button>
-        <button pButton type="button" label="Novo" class="ui-button-info" style="margin-right: 2px;"></button>
+        style="margin-right: 4px;" [disabled]="!f.valid"></button>
+        <button pButton type="button" label="Novo" class="ui-button-info" style="margin-right: 4px;"
+        (click)="novo(f)"></button>
         <a routerLink="/lancamentos">Voltar para a pesquisa</a>
       </div>
 

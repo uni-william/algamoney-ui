@@ -58,7 +58,9 @@
                 <td class="col-data-content">{{lancamento.dataPagamento | date: 'dd/MM/y'}}</td>
                 <td class="col-valor-content" [ngStyle]="{ color: lancamento.tipo === 'DESPESA' ? 'red' : 'blue'}">{{lancamento.valor | number: '1.2-2'}}</td>
                 <td class="col-acoes">
-                  <a pButton icon="pi pi-pencil" style="margin-right: 3px;" pTooltip="Editar" tooltipPosition="top"></a>
+                  <a pButton icon="pi pi-pencil" style="margin-right: 3px;"
+                    pTooltip="Editar" tooltipPosition="top"
+                    [routerLink]="['/lancamentos', lancamento.codigo]"></a>
                   <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(lancamento)"></button>
               </td>
             </tr>

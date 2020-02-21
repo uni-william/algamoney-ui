@@ -6,6 +6,7 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 
 import { PessoaService, PessoaFiltro } from './../pessoa.service';
 import { Table } from 'primeng/table/table';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -21,14 +22,15 @@ export class PessoasPesquisaComponent implements OnInit {
   @ViewChild('tabela', {static: true}) grid: Table;
 
   ngOnInit() {
-
+    this.title.setTitle('Pesquisa de pessoas');
   }
 
   constructor(
     private pessoaService: PessoaService,
     private errorHandle: ErrorHandlerService,
     private toasty: ToastyService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private title: Title
   ) { }
 
   pesquisar(pagina = 0) {

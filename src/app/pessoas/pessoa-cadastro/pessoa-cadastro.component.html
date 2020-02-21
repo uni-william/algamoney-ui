@@ -82,7 +82,8 @@
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar"
         style="margin-right: 2px;" [disabled]="!pessoaForm.valid"></button>
-        <button pButton type="button" label="Novo" class="ui-button-info" style="margin-right: 2px;"></button>
+        <button pButton type="button" label="Novo" class="ui-button-info"
+        style="margin-right: 2px;" (click)="novo(pessoaForm)"></button>
         <a routerLink="/pessoas">Voltar para a pesquisa</a>
       </div>
 
