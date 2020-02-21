@@ -1,5 +1,6 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { ToastyModule } from 'ng2-toasty';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
@@ -17,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
   declarations: [NavbarComponent],
   imports: [
     CommonModule,
+    RouterModule,
 
     ConfirmDialogModule,
     ToastyModule.forRoot(),
