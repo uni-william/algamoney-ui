@@ -11,6 +11,7 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 
 import { AppRoutingModule } from './app-routing.module';
+import { SegurancaModule } from './seguranca/seguranca.module';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -23,6 +24,7 @@ registerLocaleData(localePt);
     CoreModule,
     LancamentosModule,
     PessoasModule,
+    SegurancaModule,
     HttpClientModule,
     AppRoutingModule
 

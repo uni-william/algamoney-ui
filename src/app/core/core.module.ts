@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { ToastyModule } from 'ng2-toasty';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
+import { AuthService } from './../seguranca/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { ConfirmationService } from 'primeng/api';
 
 import { PessoaService } from './../pessoas/pessoa.service';
@@ -34,10 +36,10 @@ import { Title } from '@angular/platform-browser';
     LancamentoService,
     PessoaService,
     CategoriaService,
-
+    AuthService,
     ConfirmationService,
     Title,
-
+    JwtHelperService,
     ErrorHandlerService,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
 
