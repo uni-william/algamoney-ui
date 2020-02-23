@@ -15,10 +15,14 @@ export class ErrorHandlerService {
     if (typeof erroResponse === 'string') {
       msg = erroResponse;
     } else if (erroResponse instanceof HttpErrorResponse && erroResponse.status >= 400 && erroResponse.status <= 499) {
-      if (erroResponse.error.error) {
-        msg = 'Erro ao processar serviço remoto. Tente novamente.';
+      if (erroResponse.status === 403) {
+        msg = 'Você não tem permissão para executar esta ação';
       } else {
-        msg = erroResponse.error[0].mensagemUsuario;
+        if (erroResponse.error.error) {
+          msg = 'Erro ao processar serviço remoto. Tente novamente.';
+        } else {
+          msg = erroResponse.error[0].mensagemUsuario;
+        }
       }
     } else {
       msg = 'Erro ao processar serviço remoto. Tente novamente.';

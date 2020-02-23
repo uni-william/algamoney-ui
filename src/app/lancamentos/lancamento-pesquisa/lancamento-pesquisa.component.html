@@ -61,7 +61,9 @@
                   <a pButton icon="pi pi-pencil" style="margin-right: 3px;"
                     pTooltip="Editar" tooltipPosition="top"
                     [routerLink]="['/lancamentos', lancamento.codigo]"></a>
-                  <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top" (click)="confirmarExclusao(lancamento)"></button>
+                  <button pButton icon="pi pi-trash" pTooltip="Excluir" tooltipPosition="top"
+                   (click)="confirmarExclusao(lancamento)"
+                   [disabled]="!temPermissaoRemover()"></button>
               </td>
             </tr>
         </ng-template>

@@ -4,6 +4,7 @@ import { LazyLoadEvent } from 'primeng/api/public_api';
 import { Table } from 'primeng/table/table';
 import { ToastyService } from 'ng2-toasty';
 import {ConfirmationService} from 'primeng/api';
+import { AuthService } from './../../seguranca/auth.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { Title } from '@angular/platform-browser';
 
@@ -21,11 +22,14 @@ export class LancamentoPesquisaComponent implements OnInit {
 
   constructor(
     private lancamentoService: LancamentoService,
+    private auth: AuthService,
     private errorHandle: ErrorHandlerService,
     private toasty: ToastyService,
     private confirmation: ConfirmationService,
     private title: Title
   ) { }
+
+  permissaoRemover = 'ROLE_REMOVER_LANCAMENTO';
 
   ngOnInit() {
     this.title.setTitle('Pesquisa de lançamentos');
@@ -63,6 +67,10 @@ export class LancamentoPesquisaComponent implements OnInit {
         this.toasty.success('Lançamento excluído com sucesso!');
       })
       .catch(erro => this.errorHandle.handle(erro));
+  }
+
+  temPermissaoRemover() {
+    return this.auth.temPermissao(this.permissaoRemover);
   }
 
 }

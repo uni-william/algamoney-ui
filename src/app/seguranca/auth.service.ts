@@ -24,7 +24,7 @@ export class AuthService {
     headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post(this.oauthTokenUrl, body, { headers })
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
     .toPromise()
     .then(response => {
       this.armazenarToken(response['access_token']);
@@ -41,8 +41,40 @@ export class AuthService {
     });
   }
 
+  isAccessTokenInvalido() {
+    const token = localStorage.getItem('token');
+    return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
   temPermissao(permissao: string) {
     return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
+  obterNovoAccessToken(): Promise<void> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+    const body = 'grant_type=refresh_token';
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
+    .toPromise()
+    .then(response => {
+      this.armazenarToken(response['access_token']);
+      console.log('Novo access token criado!');
+      return Promise.resolve(null);
+    })
+    .catch(response => {
+      console.log('Erro ao renovar token', response);
+      return Promise.resolve(null);
+    });
+  }
+
+  temQualquerPermissao(roles) {
+    for(const role of roles) {
+      if (this.temPermissao(role)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private armazenarToken(token: string) {
