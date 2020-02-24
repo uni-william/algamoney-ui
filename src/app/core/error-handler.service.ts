@@ -1,3 +1,5 @@
+import { NotAuthenticatedError } from './../seguranca/money-http-interceptor';
+import { Router } from '@angular/router';
 import { ToastyService } from 'ng2-toasty';
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -7,13 +9,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ErrorHandlerService {
 
-  constructor(private toasty: ToastyService) { }
+  constructor(
+    private toasty: ToastyService,
+    private router: Router
+  ) { }
 
   handle(erroResponse: any) {
     let msg: string;
     console.log('Ocorreu um erro', erroResponse);
     if (typeof erroResponse === 'string') {
-      msg = erroResponse;
+        msg = erroResponse;
+
+    } else if ( erroResponse instanceof NotAuthenticatedError) {
+      msg = 'Sua sessão expirou!';
+      this.router.navigate(['/login']);
     } else if (erroResponse instanceof HttpErrorResponse && erroResponse.status >= 400 && erroResponse.status <= 499) {
       if (erroResponse.status === 403) {
         msg = 'Você não tem permissão para executar esta ação';
