@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
@@ -25,6 +26,7 @@ registerLocaleData(localePt);
     LancamentosModule,
     PessoasModule,
     SegurancaModule,
+    DashboardModule,
     HttpClientModule,
     AppRoutingModule
 
