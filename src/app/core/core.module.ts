@@ -12,6 +12,7 @@ import { ConfirmationService } from 'primeng/api';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
 import { CategoriaService } from './../categorias/categoria.service';
+import { DashboardService } from './../dashboard/dashboard.service';
 import { ErrorHandlerService } from './error-handler.service';
 
 import { NavbarComponent } from './navbar/navbar.component';
@@ -40,6 +41,7 @@ import { NaoAutorizadoComponent } from './nao-autorizado.component';
     LancamentoService,
     PessoaService,
     CategoriaService,
+    DashboardService,
     AuthService,
     ConfirmationService,
     Title,
