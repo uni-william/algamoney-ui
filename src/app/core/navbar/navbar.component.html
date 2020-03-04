@@ -10,9 +10,13 @@
   <ul class="navbar-menu" [hidden]="!exibindoMenu">
     <li class="navbar-usuario">{{ usuarioLogado }}</li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
-    *ngIf="temPermissaoLancamento()"><a routerLink="/lancamentos">Lançamentos</a></li>
+    *ngIf="temPermissaoLancamento()"><a routerLink="/dashboard" (click)="exibindoMenu = !exibindoMenu">Dashboard</a></li>
     <li class="navbar-menuitem" routerLinkActive="ativo"
-    *ngIf="temPermissaoPessoa()"><a routerLink="/pessoas">Pessoas</a></li>
+    *ngIf="temPermissaoLancamento()"><a routerLink="/lancamentos" (click)="exibindoMenu = !exibindoMenu">Lançamentos</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+    *ngIf="temPermissaoPessoa()"><a routerLink="/pessoas" (click)="exibindoMenu = !exibindoMenu">Pessoas</a></li>
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+    *ngIf="temPermissaoLancamento()"><a routerLink="/relatorios/lancamentos" (click)="exibindoMenu = !exibindoMenu">Relatório</a></li>
     <li class="navbar-menuitem"><a href="javascript:;" (click)="logout()">Logout</a></li>
   </ul>
 

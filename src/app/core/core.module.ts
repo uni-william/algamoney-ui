@@ -13,6 +13,7 @@ import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
 import { CategoriaService } from './../categorias/categoria.service';
 import { DashboardService } from './../dashboard/dashboard.service';
+import { RelatoriosService } from './../relatorios/relatorios.service';
 import { ErrorHandlerService } from './error-handler.service';
 
 import { NavbarComponent } from './navbar/navbar.component';
@@ -42,6 +43,7 @@ import { NaoAutorizadoComponent } from './nao-autorizado.component';
     PessoaService,
     CategoriaService,
     DashboardService,
+    RelatoriosService,
     AuthService,
     ConfirmationService,
     Title,

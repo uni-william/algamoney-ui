@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { RelatoriosModule } from './relatorios/relatorios.module';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
@@ -27,6 +28,7 @@ registerLocaleData(localePt);
     PessoasModule,
     SegurancaModule,
     DashboardModule,
+    RelatoriosModule,
     HttpClientModule,
     AppRoutingModule
 
