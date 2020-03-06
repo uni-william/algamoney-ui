@@ -56,6 +56,10 @@ export class PessoaCadastroComponent implements OnInit {
     return Boolean(this.pessoa.codigo);
   }
 
+  get editandoContato() {
+    return Boolean(this.contato && this.contato.codigo != null);
+  }
+
   carregarPessoa(codigo: number) {
     this.pessoaService.buscarPorCodigo(codigo)
     .then(pessoa => {
@@ -109,6 +113,10 @@ export class PessoaCadastroComponent implements OnInit {
     this.pessoa.contatos[this.contatoIndex] = this.clonarContato(this.contato);
     this.exibindoFormularioContato = false;
     frm.reset();
+  }
+
+  removerContato(index: number) {
+    this.pessoa.contatos.splice(index, 1);
   }
 
   clonarContato(contato: Contato): Contato {

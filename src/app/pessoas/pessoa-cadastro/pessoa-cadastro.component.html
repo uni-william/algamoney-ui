@@ -100,7 +100,8 @@
                       pTooltip="Editar" tooltipPosition="top" style="margin-right: 2px;"
                       (click)="prepararEdicaoContato(contato, rowIndex)"></button>
                       <button pButton icon="pi pi-trash" type="button"
-                      pTooltip="Excluir" tooltipPosition="top"></button>
+                      pTooltip="Excluir" tooltipPosition="top"
+                      (click)="removerContato(rowIndex)"></button>
                     </td>
 
                   </tr>
@@ -126,7 +127,7 @@
   </form>
 </div>
 
-<p-dialog header="Novo contato" [(visible)]="exibindoFormularioContato" modal="modal" *ngIf="contato">
+<p-dialog [header]="editandoContato ? 'Edição de contato' : 'Novo contato'" [(visible)]="exibindoFormularioContato" modal="modal" *ngIf="contato">
   <form #frmContato="ngForm" (ngSubmit)="confirmarContato(frmContato)">
     <div class="ui-g-12 ui-fluid">
       <label>Nome</label>

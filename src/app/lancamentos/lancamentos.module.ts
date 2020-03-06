@@ -10,6 +10,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import {FileUploadModule} from 'primeng/fileupload';
 import { NgxCurrencyModule } from 'ngx-currency';
 
 import { SharedModule } from './../shared/shared.module';
@@ -34,6 +35,7 @@ import { LancamentosRoutingModule } from './lancamentos-routing.module';
     InputTextModule,
     InputTextareaModule,
     DropdownModule,
+    FileUploadModule,
     NgxCurrencyModule,
 
     SharedModule,
