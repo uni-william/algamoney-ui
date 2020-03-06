@@ -3,13 +3,12 @@
 
     <div class="ui-g">
       <div class="ui-g-12">
-        <h1>Nova Pessoa</h1>
+        <h1>{{ editando ? 'Edição de' : 'Nova' }} pessoa</h1>
       </div>
 
       <div class="ui-g-12 ui-fluid">
         <label>Nome</label>
-        <input pInputText type="text" name="nome"
-        #nome="ngModel" required minlength="5" [(ngModel)]="pessoa.nome">
+        <input pInputText type="text" name="nome" #nome="ngModel" required minlength="5" [(ngModel)]="pessoa.nome">
 
         <app-message [control]="nome" error="required" text="Informe um nome"></app-message>
 
@@ -20,8 +19,8 @@
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label>Logradouro</label>
-        <input pInputText type="text" name="logradouro"
-        #logradouro="ngModel" required [(ngModel)]="pessoa.endereco.logradouro">
+        <input pInputText type="text" name="logradouro" #logradouro="ngModel" required
+          [(ngModel)]="pessoa.endereco.logradouro">
 
         <app-message [control]="logradouro" error="required" text="Informe o logradouro"></app-message>
 
@@ -29,8 +28,7 @@
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label>Número</label>
-        <input pInputText type="text" name="numero"
-        #numero="ngModel" required [(ngModel)]="pessoa.endereco.numero">
+        <input pInputText type="text" name="numero" #numero="ngModel" required [(ngModel)]="pessoa.endereco.numero">
 
         <app-message [control]="numero" error="required" text="Informe o número"></app-message>
 
@@ -38,15 +36,13 @@
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>Complemento</label>
-        <input pInputText type="text" name="complemento"
-        [(ngModel)]="pessoa.endereco.complemento"
-        #complemento="ngModel">
+        <input pInputText type="text" name="complemento" [(ngModel)]="pessoa.endereco.complemento"
+          #complemento="ngModel">
       </div>
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>Bairro</label>
-        <input pInputText type="text" name="bairro"
-        #bairro="ngModel" required [(ngModel)]="pessoa.endereco.bairro">
+        <input pInputText type="text" name="bairro" #bairro="ngModel" required [(ngModel)]="pessoa.endereco.bairro">
 
         <app-message [control]="bairro" error="required" text="Informe o bairro"></app-message>
 
@@ -54,9 +50,8 @@
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>CEP</label>
-        <p-inputMask mask="99.999-999"
-        name="cep" #cep="ngModel" required
-        [(ngModel)]="pessoa.endereco.cep"></p-inputMask>
+        <p-inputMask mask="99.999-999" name="cep" #cep="ngModel" required [(ngModel)]="pessoa.endereco.cep">
+        </p-inputMask>
 
         <app-message [control]="cep" error="required" text="Informe o CEP"></app-message>
 
@@ -64,29 +59,96 @@
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Cidade</label>
-        <input pInputText type="text" [(ngModel)]="pessoa.endereco.cidade"
-        name="cidade" #cidade="ngModel" required>
+        <input pInputText type="text" [(ngModel)]="pessoa.endereco.cidade" name="cidade" #cidade="ngModel" required>
         <app-message [control]="cidade" error="required" text="Informe a Cidade"></app-message>
 
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Estado</label>
-        <input pInputText type="text" [(ngModel)]="pessoa.endereco.estado"
-        name="estado" #estado="ngModel" required>
+        <input pInputText type="text" [(ngModel)]="pessoa.endereco.estado" name="estado" #estado="ngModel" required>
 
         <app-message [control]="estado" error="required" text="Informe o Estado"></app-message>
 
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar"
-        style="margin-right: 2px;" [disabled]="!pessoaForm.valid"></button>
-        <button pButton type="button" label="Novo" class="ui-button-info"
-        style="margin-right: 2px;" (click)="novo(pessoaForm)"></button>
+        <p-panel header="Contatos">
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <button pButton label="Novo" icon="pi pi-plus" type="button" class="ui-button-secondary" (click)="prepararNovoContato()"></button>
+            </div>
+            <div class="ui-g-12">
+              <p-table [value]="pessoa.contatos" [responsive]="true">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th class="col-acoes-header"></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body"
+                  let-contato
+                  let-rowIndex="rowIndex">
+                  <tr>
+                    <td>{{ contato.nome }}</td>
+                    <td>{{ contato.email }}</td>
+                    <td>{{ contato.telefone }}</td>
+                    <td class="col-acoes">
+                      <button pButton icon="pi pi-pencil" type="button"
+                      pTooltip="Editar" tooltipPosition="top" style="margin-right: 2px;"
+                      (click)="prepararEdicaoContato(contato, rowIndex)"></button>
+                      <button pButton icon="pi pi-trash" type="button"
+                      pTooltip="Excluir" tooltipPosition="top"></button>
+                    </td>
+
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    Nenhum contato cadastrado
+                </ng-template>
+              </p-table>
+
+            </div>
+          </div>
+        </p-panel>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" style="margin-right: 2px;" [disabled]="!pessoaForm.valid"></button>
+        <button pButton type="button" label="Novo" class="ui-button-info" style="margin-right: 2px;"
+          (click)="novo(pessoaForm)"></button>
         <a routerLink="/pessoas">Voltar para a pesquisa</a>
       </div>
 
     </div>
   </form>
 </div>
+
+<p-dialog header="Novo contato" [(visible)]="exibindoFormularioContato" modal="modal" *ngIf="contato">
+  <form #frmContato="ngForm" (ngSubmit)="confirmarContato(frmContato)">
+    <div class="ui-g-12 ui-fluid">
+      <label>Nome</label>
+      <input pInputText type="text" name="nome" required [(ngModel)]="contato.nome" #contatoNome="ngModel">
+      <app-message [control]="contatoNome" error="required" text="Informe o nome"></app-message>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label>E-mail</label>
+      <input pInputText type="text" name="email" email required [(ngModel)]="contato.email" #contatoEmail="ngModel">
+      <app-message [control]="contatoEmail" error="required" text="Informe o e-mail"></app-message>
+      <app-message [control]="contatoEmail" error="email" text="Informe um e-mail válido"></app-message>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label>Telefone</label>
+      <p-inputMask name="telefone" [(ngModel)]="contato.telefone" mask="(99)99999-999?9"></p-inputMask>
+    </div>
+    <div class="ui-g-12">
+      <button pButton type="submit" label="Confirmar" [disabled]="!frmContato.valid"></button>
+
+    </div>
+
+  </form>
+</p-dialog>

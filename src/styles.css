@@ -16,20 +16,29 @@ label {
   }
 }
 
+.col-valor {
+  width: 120px;
+  text-align: right;
+}
+
 .col-valor-header {
   width: 120px;
 }
-.col-valor-content {
-  text-align: right;
+
+.col-data {
+  width: 120px;
+  text-align: center;
 }
 
 .col-data-header {
   width: 120px;
 }
-.col-data-content {
+
+.col-acoes {
+  width: 130px;
   text-align: center;
 }
-.col-acoes {
-  width: 100px;
-  text-align: center;
+
+.col-acoes-header {
+  width: 130px;
 }

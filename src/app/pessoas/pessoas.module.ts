@@ -6,6 +6,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { PanelModule } from 'primeng/panel';
+import {DialogModule} from 'primeng/dialog';
 
 import { SharedModule } from './../shared/shared.module';
 
@@ -21,12 +23,13 @@ import { PessoasRoutingModule } from './pessoas-routing.module';
   imports: [
     CommonModule,
     FormsModule,
-
     InputTextModule,
     ButtonModule,
     TableModule,
     TooltipModule,
     InputMaskModule,
+    PanelModule,
+    DialogModule,
 
     SharedModule,
     PessoasRoutingModule
