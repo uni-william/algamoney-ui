@@ -8,12 +8,15 @@
 
       <div class="ui-g-12 ui-fluid">
         <label>Nome</label>
-        <input pInputText type="text" name="nome" #nome="ngModel" required minlength="5" [(ngModel)]="pessoa.nome">
+        <input pInputText type="text" name="nome" #nome="ngModel" required minlength="5" [(ngModel)]="pessoa.nome"
+          (keyup)="existeNome(nome.value, pessoaForm)">
 
         <app-message [control]="nome" error="required" text="Informe um nome"></app-message>
 
         <app-message [control]="nome" error="minlength"
           text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres."></app-message>
+
+        <app-message [control]="nome" error="nameExists" text="Nome já existe"></app-message>
 
       </div>
 
@@ -76,7 +79,8 @@
         <p-panel header="Contatos">
           <div class="ui-g">
             <div class="ui-g-12">
-              <button pButton label="Novo" icon="pi pi-plus" type="button" class="ui-button-secondary" (click)="prepararNovoContato()"></button>
+              <button pButton label="Novo" icon="pi pi-plus" type="button" class="ui-button-secondary"
+                (click)="prepararNovoContato()"></button>
             </div>
             <div class="ui-g-12">
               <p-table [value]="pessoa.contatos" [responsive]="true">
@@ -88,26 +92,22 @@
                     <th class="col-acoes-header"></th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body"
-                  let-contato
-                  let-rowIndex="rowIndex">
+                <ng-template pTemplate="body" let-contato let-rowIndex="rowIndex">
                   <tr>
                     <td>{{ contato.nome }}</td>
                     <td>{{ contato.email }}</td>
                     <td>{{ contato.telefone }}</td>
                     <td class="col-acoes">
-                      <button pButton icon="pi pi-pencil" type="button"
-                      pTooltip="Editar" tooltipPosition="top" style="margin-right: 2px;"
-                      (click)="prepararEdicaoContato(contato, rowIndex)"></button>
-                      <button pButton icon="pi pi-trash" type="button"
-                      pTooltip="Excluir" tooltipPosition="top"
-                      (click)="removerContato(rowIndex)"></button>
+                      <button pButton icon="pi pi-pencil" type="button" pTooltip="Editar" tooltipPosition="top"
+                        style="margin-right: 2px;" (click)="prepararEdicaoContato(contato, rowIndex)"></button>
+                      <button pButton icon="pi pi-trash" type="button" pTooltip="Excluir" tooltipPosition="top"
+                        (click)="removerContato(rowIndex)"></button>
                     </td>
 
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
-                    Nenhum contato cadastrado
+                  Nenhum contato cadastrado
                 </ng-template>
               </p-table>
 
@@ -127,7 +127,8 @@
   </form>
 </div>
 
-<p-dialog [header]="editandoContato ? 'Edição de contato' : 'Novo contato'" [(visible)]="exibindoFormularioContato" modal="modal" *ngIf="contato">
+<p-dialog [header]="editandoContato ? 'Edição de contato' : 'Novo contato'" [(visible)]="exibindoFormularioContato"
+  modal="modal" *ngIf="contato">
   <form #frmContato="ngForm" (ngSubmit)="confirmarContato(frmContato)">
     <div class="ui-g-12 ui-fluid">
       <label>Nome</label>

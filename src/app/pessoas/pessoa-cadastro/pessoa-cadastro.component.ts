@@ -19,6 +19,7 @@ export class PessoaCadastroComponent implements OnInit {
   exibindoFormularioContato = false;
   contato: Contato;
   contatoIndex: number;
+  existe = false;
 
 
   constructor(
@@ -60,17 +61,30 @@ export class PessoaCadastroComponent implements OnInit {
     return Boolean(this.contato && this.contato.codigo != null);
   }
 
+  existeNome(nome: string, form: NgForm) {
+    if (nome) {
+    this.pessoaService.existeNome(nome)
+      .then(resposta => {
+        if (resposta && !this.editando) {
+          form.controls['nome'].setErrors({ nameExists: true });
+        }
+        return resposta;
+      })
+      .catch(erro => false);
+    }
+  }
+
   carregarPessoa(codigo: number) {
     this.pessoaService.buscarPorCodigo(codigo)
-    .then(pessoa => {
-      this.pessoa = pessoa;
-      this.atualizarTituloEdicao();
-    })
-    .catch(erro => this.handler.handle(erro));
+      .then(pessoa => {
+        this.pessoa = pessoa;
+        this.atualizarTituloEdicao();
+      })
+      .catch(erro => this.handler.handle(erro));
   }
 
   salvar(form: NgForm) {
-    if ( this.editando) {
+    if (this.editando) {
       this.atualizarPessoa(form);
     } else {
       this.adicionarPessoa(form);
@@ -79,22 +93,22 @@ export class PessoaCadastroComponent implements OnInit {
 
   atualizarPessoa(form: NgForm) {
     this.pessoaService.atualizar(this.pessoa)
-    .then(pessoa => {
-      this.pessoa = pessoa;
-      this.toasty.success('Pessoa alterada com sucesso');
-      this.atualizarTituloEdicao();
-    })
-    .catch(erro => this.handler.handle(erro));
+      .then(pessoa => {
+        this.pessoa = pessoa;
+        this.toasty.success('Pessoa alterada com sucesso');
+        this.atualizarTituloEdicao();
+      })
+      .catch(erro => this.handler.handle(erro));
   }
 
 
   adicionarPessoa(form: NgForm) {
     this.pessoaService.adicionar(this.pessoa)
-    .then(pessoaAdicionada => {
-      this.toasty.success('Pessoa adicionada com sucesso');
-      this.router.navigate(['/pessoas/', pessoaAdicionada.codigo]);
-    })
-    .catch(erro => this.handler.handle(erro));
+      .then(pessoaAdicionada => {
+        this.toasty.success('Pessoa adicionada com sucesso');
+        this.router.navigate(['/pessoas/', pessoaAdicionada.codigo]);
+      })
+      .catch(erro => this.handler.handle(erro));
   }
 
   novo(form: NgForm) {

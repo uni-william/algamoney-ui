@@ -65,6 +65,15 @@ export class PessoaService {
         .then(() => null);
     }
 
+    existeNome(nome: string): Promise<boolean> {
+      return this.http.post(`${this.pessoasUrl}/existeNome`, nome)
+      .toPromise()
+      .then(response => {
+        const resultado = response as boolean;
+        return resultado;
+      });
+    }
+
     adicionar(pessoa: Pessoa): Promise<Pessoa> {
       return this.http.post<Pessoa>(
         this.pessoasUrl, pessoa)
