@@ -53,6 +53,10 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarPessoas();
   }
 
+  get urlUploadAnexo() {
+    return this.lancamentoService.urlUploadAnexo();
+  }
+
   get editando() {
     return Boolean(this.lancamento.codigo);
   }
