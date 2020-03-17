@@ -24,8 +24,15 @@ export class LancamentoService {
     this.lancamentosUrl = `${environment.apiUrl}/lancamentos`;
   }
 
-  urlUploadAnexo(): string {
-    return `${this.lancamentosUrl}/anexo`;
+  inputFileChange(event): Promise<any> {
+    if (event.target.files && event.target.files[0]) {
+      const anexo = event.target.files[0];
+      const formData = new FormData();
+      formData.append('anexo', anexo);
+      return this.http.post(`${this.lancamentosUrl}/anexo`, formData)
+      .toPromise()
+      .then(response => response);
+    }
   }
 
   pesquisar(filtro: LancamentoFiltro): Promise<any> {

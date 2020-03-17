@@ -53,12 +53,14 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarPessoas();
   }
 
-  get urlUploadAnexo() {
-    return this.lancamentoService.urlUploadAnexo();
-  }
 
   get editando() {
     return Boolean(this.lancamento.codigo);
+  }
+
+  inputFileChange(event) {
+    this.lancamentoService.inputFileChange(event)
+    .then(response => this.lancamento.anexo = response['arquivo']);
   }
 
   carregarLancamento(codigo: number) {

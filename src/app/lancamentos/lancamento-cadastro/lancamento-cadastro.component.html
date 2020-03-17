@@ -69,9 +69,14 @@
         <textarea pInputTextarea [rows]="3" name="observacao" [(ngModel)]="lancamento.observacao"></textarea>
       </div>
 
-      <div class="ui-g-6 ui-g-offset-6 ui-md-2 ui-md-offset-10 ui-fluid">
-        <p-fileUpload name="anexo" mode="basic" auto=true maxFileSize="10000000"
-        chooseLabel="Anexo" accept="image/*,application/*" [url]="urlUploadAnexo"></p-fileUpload>
+      <div class="ui-g-6 ui-g-offset-0 ui-md-2 ui-md-offset-7 ui-fluid">
+        <input type="file" (change)="inputFileChange($event)" />
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <a target="_blank" pTooltip="baixar anexo" tooltipPosition="top"
+        href=""></a>
+
       </div>
 
       <div class="ui-g-12">
