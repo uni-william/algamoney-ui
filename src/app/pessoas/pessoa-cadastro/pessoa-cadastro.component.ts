@@ -20,6 +20,9 @@ export class PessoaCadastroComponent implements OnInit {
   contato: Contato;
   contatoIndex: number;
   existe = false;
+  estados: any[];
+  cidades: any[];
+  estadoSelecionado: number;
 
 
   constructor(
@@ -35,6 +38,7 @@ export class PessoaCadastroComponent implements OnInit {
     const codigoPessoa = (this.route.snapshot.params['codigo']);
     this.title.setTitle('Nova pessoa');
 
+    this.carregarEstados();
 
     if (codigoPessoa) {
       this.carregarPessoa(codigoPessoa);
@@ -78,6 +82,12 @@ export class PessoaCadastroComponent implements OnInit {
     this.pessoaService.buscarPorCodigo(codigo)
       .then(pessoa => {
         this.pessoa = pessoa;
+
+        this.estadoSelecionado = (this.pessoa.endereco.cidade) ? this.pessoa.endereco.cidade.estado.codigo : null;
+        if (this.estadoSelecionado) {
+          this.carregarCidades();
+        }
+
         this.atualizarTituloEdicao();
       })
       .catch(erro => this.handler.handle(erro));
@@ -135,6 +145,22 @@ export class PessoaCadastroComponent implements OnInit {
 
   clonarContato(contato: Contato): Contato {
     return new Contato(contato.codigo, contato.nome, contato.email, contato.telefone);
+  }
+
+  carregarEstados() {
+    this.pessoaService.listarEstados()
+    .then(lista => {
+      this.estados = lista.map(uf => ({ label: uf.nome, value: uf.codigo }));
+    })
+    .catch(erro => this.handler.handle(erro));
+  }
+
+  carregarCidades() {
+    this.pessoaService.pesquisarCidades(this.estadoSelecionado)
+    .then(lista => {
+      this.cidades = lista.map(c => ({ label: c.nome, value: c.codigo }));
+    })
+    .catch(erro => this.handler.handle(erro));
   }
 
 
